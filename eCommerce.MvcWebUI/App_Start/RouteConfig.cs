@@ -16,7 +16,7 @@ namespace eCommerce.MvcWebUI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Admin", action = "ListBrand", id = UrlParameter.Optional }
+                defaults: new { controller = "Product", action = "ListProduct", id = UrlParameter.Optional }
             );
         }
     }

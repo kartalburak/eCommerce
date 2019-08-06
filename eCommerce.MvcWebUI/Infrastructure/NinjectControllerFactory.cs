@@ -25,10 +25,10 @@ namespace eCommerce.MvcWebUI.Infrastructure
 
         private void AddBllBindings()
         {
-            _ninjectKernel.Bind<IProductService>().To<ProductManager>().WithConstructorArgument("productDal",new PetapocoProductDal());
-            _ninjectKernel.Bind<ICategoryService>().To<CategoryManager>().WithConstructorArgument("categoryDal", new PetapocoCategoryDal());
-            _ninjectKernel.Bind<IBrandService>().To<BrandManager>().WithConstructorArgument("brandDal", new PetapocoBrandDal());
-            _ninjectKernel.Bind<IPictureService>().To<PictureManager>().WithConstructorArgument("pictureDal", new PetapocoPictureDal());
+            _ninjectKernel.Bind<IProductService>().To<ProductManager>().WithConstructorArgument("productDal",new EfProductDal());
+            _ninjectKernel.Bind<ICategoryService>().To<CategoryManager>().WithConstructorArgument("categoryDal", new EfCategoryDal());
+            _ninjectKernel.Bind<IBrandService>().To<BrandManager>().WithConstructorArgument("brandDal", new EfBrandDal());
+            _ninjectKernel.Bind<IPictureService>().To<PictureManager>().WithConstructorArgument("pictureDal", new EfPictureDal());
 
             _ninjectKernel.Bind<IBrandService>().To<BrandManager>()
                 .WhenInjectedInto<AdminController>()
