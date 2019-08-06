@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "UpdateProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<br />
+<br />
+<div class="row">
+    @*<div class="col-md-1"></div>*@
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Ürün Güncelleme</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" action="@Url.Action("UpdateProduct","Product")">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ürün Adı</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="ProductName" class="form-control" placeholder="Ürün Adınızı yazınız...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ürün Açıklama</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="ProductDescription" class="form-control" placeholder="Ürün Açıklama Giriniz...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ürün Kodu</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="ProductCode" class="form-control" placeholder="Ürün Kodunuzu yazınız...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ürün Alış Fiyatı</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="PurchasePrice" class="form-control" placeholder="Ürün Alış Fiyatı Giriniz...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Ürün Satış Fiyatı</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="SalePrice" class="form-control" placeholder="Ürün Satış Fiyatı Giriniz...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Eklenme Tarihi</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="UploadedDate" class="form-control" placeholder="Eklenme Tarihi Giriniz...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Son Kullanma Tarihi</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" name="ExpirationDate" class="form-control" placeholder="Son Kullanma Tarihi Giriniz...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Kategori Adı</label>
+
+                        <div class="col-sm-10">
+                            <select name="CategoryId" class="form-control">
+                                <option value="ID :1">Kategori Adı1</option>
+                                <option value="ID :2">Kategori Adı2</option>
+                            </select>
+
+                            @*<input type="" name="ExpirationDate" class="form-control" placeholder="Son Kullanma Tarihi Giriniz...">*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Marka Adı</label>
+                        <div class="col-sm-10">
+                            <select name="BrandId" class="form-control">
+                                <option value="ID :1">Marka Adı1</option>
+                                <option value="ID :2">Marka Adı2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile" class="col-sm-2 control-label">Ürün Resmi (Büyük)</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="fileUploadBig" id="exampleInputFile">
+
+                            @*<p class="help-block">Example block-level help text here.</p>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile2" class="col-sm-2 control-label">Ürün Resmi (Orta)</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="fileUploadMiddle" id="exampleInputFile2">
+
+                            @*<p class="help-block">Example block-level help text here.</p>*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile3" class="col-sm-2 control-label">Ürün Resmi (Küçük)</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="fileUploadSmall" id="exampleInputFile3">
+
+                            @*<p class="help-block">Example block-level help text here.</p>*@
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    @*<button type="submit" class="btn btn-default">Cancel</button>*@
+                    <button type="submit" class="btn btn-info pull-right">Ürünü Güncelle</button>
+                </div>
+                <!-- /.box-footer -->
+            </form>
+        </div>
+    </div>
+    @*<div class="col-md-1"></div>*@
+</div>
+

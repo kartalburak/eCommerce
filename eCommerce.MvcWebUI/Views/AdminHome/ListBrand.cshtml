@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "ListBrand";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@Html.DevExpress().GetStyleSheets(
+    new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.Editors },
+    new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }
+    )
+@Html.DevExpress().GetScripts( 
+    new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
+    new Script { ExtensionSuite = ExtensionSuite.Editors },
+    new Script { ExtensionSuite = ExtensionSuite.GridView }
+    )
+
+@Html.Action("GridViewPartial", "AdminHome")
+
+﻿@functions{
+    object GetEditingBrand(ASPxGridView grid)
+    {
+        if (grid.IsNewRowEditing)
+            return new EditableBrand();
+        return grid.GetRow(grid.EditingRowVisibleIndex);
+    }
+}
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "gvEditingBrand";
+        settings.KeyFieldName = "BrandID";
+        settings.CallbackRouteValues = new { Controller = "AdminHome", Action = "ListBrand" };
+        settings.SettingsEditing.AddNewRowRouteValues = new { Controller = "AdminHome", Action = "EditFormTemplateAddNewPartial" };
+        settings.SettingsEditing.UpdateRowRouteValues = new { Controller = "AdminHome", Action = "EditFormTemplateUpdatePartial" };
+        settings.SettingsEditing.DeleteRowRouteValues = new { Controller = "AdminHome", Action = "EditFormTemplateDeletePartial" };
+        settings.SettingsEditing.Mode = GridViewEditingMode.EditFormAndDisplayRow;
+        settings.SettingsBehavior.ConfirmDelete = true;
+        settings.Width = Unit.Percentage(100);
+
+        settings.CommandColumn.Visible = true;
+        settings.CommandColumn.ShowNewButton = true;
+        settings.CommandColumn.ShowDeleteButton = true;
+        settings.CommandColumn.ShowEditButton = true;
+
+        settings.Columns.Add("Marka ID");   
+        settings.Columns.Add("Marka Adı");
+        settings.Columns.Add("Açıklama");
+        settings.Columns.Add("Resim ID");
+        
+
+        settings.SetEditFormTemplateContent(c =>
+        {
+            Html.DevExpress().FormLayout(flSettings =>
+            {
+                flSettings.Name = "FormLayoutBrands";
+                flSettings.Width = Unit.Percentage(100);
+                flSettings.SettingsAdaptivity.AdaptivityMode = FormLayoutAdaptivityMode.SingleColumnWindowLimit;
+                flSettings.SettingsAdaptivity.SwitchToSingleColumnAtWindowInnerWidth = 700;
+                flSettings.ColCount = 2;
+                flSettings.Items.Add(i =>
+                {
+                    i.FieldName = "BrandId";
+                    i.NestedExtension().TextBox(s =>
+                    {
+                        s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+                        s.Properties.ValidationSettings.Display = Display.Dynamic;
+                        s.ShowModelErrors = true;
+                        s.Width = Unit.Percentage(100);
+                    });
+                });
+                flSettings.Items.Add(i =>
+                {
+                    i.FieldName = "BrandName";
+                    i.NestedExtension().TextBox(s =>
+                    {
+                        s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+                        s.Properties.ValidationSettings.Display = Display.Dynamic;
+                        s.ShowModelErrors = true;
+                        s.Width = Unit.Percentage(100);
+                    });
+                });
+                flSettings.Items.Add(i =>
+                {
+                    i.FieldName = "BrandDescription";
+                    i.NestedExtension().TextBox(s =>
+                    {
+                        s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+                        s.Properties.ValidationSettings.Display = Display.Dynamic;
+                        s.ShowModelErrors = true;
+                        s.Width = Unit.Percentage(100);
+                    });
+                });
+                flSettings.Items.Add(i =>
+                {
+                    i.FieldName = "PictureId";
+                    i.NestedExtension().TextBox(s =>
+                    {
+                        s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithTooltip;
+                        s.Properties.ValidationSettings.Display = Display.Dynamic;
+                        s.ShowModelErrors = true;
+                        s.Width = Unit.Percentage(100);
+                    });
+                });            
+                flSettings.Items.AddEmptyItem();
+                flSettings.Items.Add(i =>
+                {
+                    i.ShowCaption = DefaultBoolean.False;
+                }).SetNestedContent(() =>
+                {
+                    ViewContext.Writer.Write("<div style='float:right'>");
+                    Html.DevExpress().Button(btnSettings =>
+                    {
+                        btnSettings.Name = "btnUpdate";
+                        btnSettings.Text = "Update";
+                        btnSettings.ClientSideEvents.Click = "function(s, e){ gvEditingWithTemplate.UpdateEdit(); }";
+                    }).Render();
+                    Html.DevExpress().Button(btnSettings =>
+                    {
+                        btnSettings.Name = "btnCancel";
+                        btnSettings.Text = "Cancel";
+                        btnSettings.Style[HtmlTextWriterStyle.MarginLeft] = "5px";
+                        btnSettings.ClientSideEvents.Click = "function(s, e){ gvEditingWithTemplate.CancelEdit(); }";
+                    }).Render();
+                    ViewContext.Writer.Write("</div>");
+                });
+            })
+            .Bind(ViewData["EditableBrand"] ?? GetEditingBrand(c.Grid))
+            .Render();
+        });
+        settings.PreRender = (sender, e) =>
+        {
+            ((MVCxGridView)sender).StartEdit(1);
+        };
+
+        DevExpress.Web.Demos.GridViewFeaturesHelper.SetupGlobalGridViewBehavior(settings);
+    });
+    if (ViewData["EditError"] != null)
+    {
+        grid.SetEditErrorText((string)ViewData["EditError"]);
+    }
+}
+@grid.Bind(Model).GetHtml()

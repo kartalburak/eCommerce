@@ -1,0 +1,106 @@
+﻿@model eCommerce.MvcWebUI.Models.ProductViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Ürün Listesi</h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Açıklama</th>
+                        <th>Durumu</th>
+                        <th>Resim</th>
+                        <th>Düzenle</th>
+                        <th>Sil</th>
+                    </tr>
+                    @foreach (var product in Model.Products.ToList())
+                    {
+                        <tr>
+                            <td>@product.ProductName</td>
+                            <td>@product.ProductDescription</td>
+                            <td><span class="label label-success">Aktif</span></td>
+                            <td><i class="fa fa-eye-slash"></i></td>
+                            <td>@Html.ActionLink("Düzenle", "UpdateProduct", new { id = product.ProductId })</td>
+                            <td>@Html.ActionLink("Sil", "DeleteProduct", new { id = product.ProductId })</td>
+                            <td>
+                                @using (Html.BeginForm("AddtoCart", "Cart"))
+                                {
+
+                                    @Html.Hidden("productId", product.ProductId)
+                                    <input type="submit" value="Sepete Ekle" />
+
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li><a href="#">&laquo;</a></li>
+                        <li>@Html.Pager(Model.PagingInfo, "Product", "ListProduct")</li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Kategori Listesi</h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+
+                @{Html.RenderAction("CategoryList", "Category");}
+
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li><a href="#">&laquo;</a></li>
+                        <li>@Html.Pager(Model.PagingInfo, "Category", "ListCategory")</li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+

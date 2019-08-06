@@ -1,0 +1,48 @@
+﻿@model System.Collections.Generic.List<eCommerce.Entities.Category>
+
+
+@Html.RouteLink("Home", new { controller = "Product", action = "ListProduct", category = 0 },
+    new { @class = ViewBag.CurrentCategory == 0 ? "" : null })
+@foreach (var category in Model)
+{
+
+    @Html.RouteLink(category.CategoryName,new
+                            {
+                                  category=category.CategoryId,
+                                  controller ="Product",
+                                  action ="ListProduct"
+                            },
+        new {@class=category.CategoryId==ViewBag.CurrentCategory?"":null})
+
+
+
+}
+
+
+
+
+@*Notes
+
+
+    "@{html.renderaction("actionname","controllername")};" controllerda bunu yazarak çağırırız.
+
+*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
