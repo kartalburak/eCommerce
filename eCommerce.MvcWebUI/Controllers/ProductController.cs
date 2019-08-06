@@ -9,6 +9,7 @@ using eCommerce.Dal.Concrete.Petapoco;
 using eCommerce.Entities;
 using eCommerce.Interfaces;
 using eCommerce.MvcWebUI.Models;
+using Ninject;
 
 namespace eCommerce.MvcWebUI.Controllers
 {

@@ -7394,7 +7394,6 @@
     <Content Include="Content\eCommerceUI\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\eCommerceUI\fonts\FontAwesome.otf" />
     <Content Include="Content\eCommerceUI\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -7405,7 +7404,6 @@
   <ItemGroup>
     <Compile Include="Admin\Controller\AdminController.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -7450,9 +7448,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\eCommerce.Business\eCommerce.Business.csproj">
